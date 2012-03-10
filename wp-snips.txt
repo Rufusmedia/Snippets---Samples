@@ -61,7 +61,112 @@
 | SOME HELPFUL WORDPRESS FUNCTIONS
 |====================================================
 */
-
+    /*
+    |====================================================
+    | STYLING FOR WP VISUAL EDITOR
+    |====================================================
+    */
+    $jc_custom_stylesheet = 'css/jc-editor-stylesheet.css';
+    add_editor_style($jc_custom_stylesheet);
+    
+    /*
+    |====================================================
+    | ADDS CUSTOM DASHBOARD WIDGETS TO ADMIN
+    |====================================================
+    */
+    function my_custom_dashboard_widgets() {
+    global $wp_meta_boxes;
+    
+    wp_add_dashboard_widget('custom_help_widget', 'My Widget Title', 'custom_dashboard_help');
+    }
+    
+    function custom_dashboard_help() {
+    echo 'My widget content';
+    }
+    
+    add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
+    
+    /*
+    |====================================================
+    |  CODE TO CHANGE LOGIN LOGO/LINK/TITLE
+    |====================================================
+    */
+    function login_styles() {
+    echo '<style type="text/css">.login h1 a { background: url('. get_bloginfo("template_directory") .'/site-assets/login-logo.png) no-repeat center top; margin-bottom:15px; }</style>';
+    }
+    add_action('login_head', 'login_styles');
+    
+    function loginpage_custom_link() {
+        return  bloginfo('url').'/';
+    }
+    add_filter('login_headerurl','loginpage_custom_link');
+    
+    function change_title_on_logo() {
+        return bloginfo('url').'/';
+    }
+    add_filter('login_headertitle', 'change_title_on_logo');
+    
+    /*
+    |====================================================
+    | ADD CUSTOM POST TYPE ICONS 
+    |====================================================
+    */
+    add_action( 'admin_head', 'cpt_icons' );
+    function cpt_icons() {
+        ?>
+        <style type="text/css" media="screen">
+            #menu-posts-POSTTYPE .wp-menu-image {
+                background: url(<?php bloginfo('template_url') ?>/site-assets/YOURIMAGE.png) no-repeat 6px -17px !important;
+            }
+        #menu-posts-POSTTYPE:hover .wp-menu-image, #menu-posts-POSTTYPE.wp-has-current-submenu .wp-menu-image {
+                background-position:6px 7px!important;
+            }
+        </style>
+    <?php }
+    
+    /*
+    |====================================================
+    | CUSTOMIZE THE ADMIN FOOTER AREA
+    |====================================================
+    */
+    function custom_admin_footer() {
+        echo 'Website design by <a href="http://www.rufusmedia.com/">Rufusmedia</a> &copy; '.date("Y").'. For site support please <a href="http://www.rufusmedia.com/contact">contact us</a>.';
+    } 
+    add_filter('admin_footer_text', 'custom_admin_footer');
+    
+    /*
+    |====================================================
+    | REMOVES DEFAULT MENUS
+    |====================================================
+    */
+    function remove_menus () {
+    global $menu;
+        $restricted = array( __('Links'), __('Tools'), __('Comments'));
+        end ($menu);
+        while (prev($menu)){
+            $value = explode(' ',$menu[key($menu)][0]);
+            if(in_array($value[0] != NULL?$value[0]:"" , $restricted)){unset($menu[key($menu)]);}
+        }
+    }
+    add_action('admin_menu', 'remove_menus');
+    
+    /*
+    |====================================================
+    | REMOVE DEFAULT DASHBOARD WIDGETS
+    |====================================================
+    */
+    function disable_default_dashboard_widgets() {
+    
+        remove_meta_box('dashboard_right_now', 'dashboard', 'core');
+        remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');
+        remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');
+        remove_meta_box('dashboard_plugins', 'dashboard', 'core');
+        remove_meta_box('dashboard_quick_press', 'dashboard', 'core');
+        remove_meta_box('dashboard_recent_drafts', 'dashboard', 'core');
+        remove_meta_box('dashboard_primary', 'dashboard', 'core');
+        remove_meta_box('dashboard_secondary', 'dashboard', 'core');
+    }
+    add_action('admin_menu', 'disable_default_dashboard_widgets');
 
 
 
