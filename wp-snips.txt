@@ -1,1 +1,67 @@
+/*
+|====================================================
+| ADVANCED CUSTOM FIELDS
+|====================================================
+*/
+    /*
+    | STANDARD ACF GET FIELD
+    ----------------------------------------------------*/
+    <?php if(get_field('')): ?>
+        <?php the_field(''); ?>
+    <?php endif; ?>
+    
+    
+    /*
+    | RETRIEVE IMAGE FROM ATTACHMENT ID
+    ----------------------------------------------------*/
+    <?php // PULLS IMAGE FROM ADVANCED CUSTOM FIELDS & RETURNS $IMAGE[0];?>
+    <?php $image = wp_get_attachment_image_src(get_field('main_product_image'), 'full'); ?>
+    <img src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" />
+    
+    /*
+    | STANDARD REPEATER SYNTAX
+    ----------------------------------------------------*/
+    <?php while(the_repeater_field('')): ?>
+        <img src="<?php the_sub_field(''); ?>" alt="<?php the_sub_field(''); ?>" />
+    <?php endwhile; ?>
+    
+    
+/*
+|====================================================
+| WORDPRESS DECLARATIONS
+|====================================================
+*/
+    /*
+    Plugin Name:
+    Plugin URI: http://www.rufusmedia.com
+    Description:
+    Version: 0.1
+    Author: Jeromy
+    Author URI: http://www.rufusmedia.com
+    License: GPLv2 or later
+    */
+    
+    
+    /*
+    Template Name:
+    */
+    
+    
+    /*   
+    Theme Name: Rufusmedia Blank Theme
+    Theme URI: http://www.rufusmedia.com
+    Description: Blank starting theme for Rufusmedia Projects
+    Author: Jeromy Condon
+    Author URI: http://www.rufusmedia.com
+    Version: 1.0
+    */
+    
+/*
+|====================================================
+| SOME HELPFUL WORDPRESS FUNCTIONS
+|====================================================
+*/
+
+
+
 
