@@ -168,5 +168,18 @@
     }
     add_action('admin_menu', 'disable_default_dashboard_widgets');
 
-
-
+    /*
+    |====================================================
+    | RENAME POSTS IN ADMIN SCREEN
+    |====================================================
+    */
+func­tion edit_admin_menus() 
+    { 
+        glob­al $menu; glob­al $submenu;
+    	$menu[5][0] = 'Recipes'; // Change Posts to Recipes
+    	$submenu['edit.php'][5][0] = 'All Recipes';
+    	$submenu['edit.php'][10][0] = 'Add a Recipe';
+    	$submenu['edit.php'][15][0] = 'Meal Types'; // Rename cat­e­gories to meal types
+    	$submenu['edit.php'][16][0] = 'Ingre­di­ents'; // Rename tags to ingre­di­ents 
+    }
+     add_action( 'admin_menu', 'edit_admin_menus' );
