@@ -2,3 +2,11 @@
 $(document).ready(function(){  
 // jQuery Code Here  
 });  
+
+
+// MOBILE NAVIGATION FOR SELECT MENUS
+jQuery(".mobile-menu").change(function(){
+if (jQuery(this).val()!='') {
+    window.location.href=jQuery(this).val();
+    }
+});
