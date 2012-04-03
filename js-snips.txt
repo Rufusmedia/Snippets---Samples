@@ -10,3 +10,11 @@ if (jQuery(this).val()!='') {
     window.location.href=jQuery(this).val();
     }
 });
+
+// TARGET ios DEVICES
+var device = navigator.userAgent.toLowerCase();
+var ios = device.match(/(iphone|ipod|ipad)/);
+if (ios) {
+     //ADD CLASSES HERE THAT WILL ONLY APPLY TO IOS
+     $("some-element").addClass("some-class");
+     }
