@@ -13,8 +13,8 @@ if (jQuery(this).val()!='') {
 
 // TARGET ios DEVICES
 var device = navigator.userAgent.toLowerCase();
-var ios = device.match(/(iphone|ipod|ipad)/);
-if (ios) {
+var mobile = device.match(/(iphone|ipod|ipad|android)/);
+if (mobile) {
      //ADD CLASSES HERE THAT WILL ONLY APPLY TO IOS
-     $("some-element").addClass("some-class");
+     $(".some-element").addClass("some-class");
      }
