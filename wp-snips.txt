@@ -173,7 +173,7 @@
     | RENAME POSTS IN ADMIN SCREEN
     |====================================================
     */
-func­tion edit_admin_menus() 
+    func­tion edit_admin_menus() 
     { 
         glob­al $menu; glob­al $submenu;
     	$menu[5][0] = 'Recipes'; // Change Posts to Recipes
@@ -183,3 +183,61 @@ func­tion edit_admin_menus()
     	$submenu['edit.php'][16][0] = 'Ingre­di­ents'; // Rename tags to ingre­di­ents 
     }
      add_action( 'admin_menu', 'edit_admin_menus' );
+
+    /*
+    |====================================================
+    | REMOVE LINKS FROM ADMIN BAR
+    |====================================================
+    */
+    function wps_admin_bar() {
+        global $wp_admin_bar;
+        $wp_admin_bar->remove_menu('wp-logo');
+        $wp_admin_bar->remove_menu('about');
+        $wp_admin_bar->remove_menu('wporg');
+        $wp_admin_bar->remove_menu('documentation');
+        $wp_admin_bar->remove_menu('support-forums');
+        $wp_admin_bar->remove_menu('feedback');
+        $wp_admin_bar->remove_menu('view-site');
+    }
+    add_action( 'wp_before_admin_bar_render', 'wps_admin_bar' );
+
+    /*
+    |====================================================
+    | REPLACE THE 'howdy!' LINK IN THE ADMIN
+    |====================================================
+    */
+    function replace_howdy( $wp_admin_bar ) {
+        $my_account=$wp_admin_bar->get_node('my-account');
+        $newtitle = str_replace( 'Howdy,', 'Logged in as', $my_account->title );
+        $wp_admin_bar->add_node( array(
+            'id' => 'my-account',
+            'title' => $newtitle,
+        ) );
+    }
+    add_filter( 'admin_bar_menu', 'replace_howdy',25 );
+
+    /*
+    |====================================================
+    | ADD MENUS TO ADMIN BAR
+    |====================================================
+    */
+    function wp_admin_bar_new_item() {
+    global $wp_admin_bar;
+    $wp_admin_bar->add_menu(array(
+    'id' => 'wp-admin-bar-new-item',
+    'title' => __('My Link'),
+    'href' => 'http://www.example.com/'
+    ));
+    }
+    add_action('wp_before_admin_bar_render', 'wp_admin_bar_new_item');
+
+    /*
+    |====================================================
+    | REMOVE THE THEME EDITOR FROM THE WORDPRESS ADMIN
+    |====================================================
+    */
+    function remove_editor_menu() {
+      remove_action('admin_menu', '_add_themes_utility_last', 101);
+    }
+    
+    add_action('_admin_menu', 'remove_editor_menu', 1);
