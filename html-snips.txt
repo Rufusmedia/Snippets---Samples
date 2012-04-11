@@ -2,13 +2,13 @@
 | SELECT MENU MOBILE NAVIGATION
 =================================================
 <nav class="main-nav mobile container">
-  <div class="sixteen columns clearfix">
-		    <form id="mobile-nav-select">
-				<select class="mobile-menu">
-					<option value="">Select Page...</option>
-					<option value="http://PUTURLHERE">PAGE LINK</option>
-				</select>
-            </form>
+	<div class="sixteen columns clearfix">
+		<form id="mobile-nav-select">
+			<select class="mobile-menu">
+			<option value="">Select Page...</option>
+			<option value="http://PUTURLHERE">PAGE LINK</option>
+			</select>
+		</form>
 	</div><!-- end .sixteen.columns -->
 </nav><!-- end .container.main-nav -->
 
