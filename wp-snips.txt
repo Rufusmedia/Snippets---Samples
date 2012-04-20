@@ -149,6 +149,23 @@
         }
     }
     add_action('admin_menu', 'remove_menus');
+
+    /*
+    |====================================================
+    | CHANGE EXCERPT LENGTH
+    |====================================================
+    */
+    
+    function custom_excerpt_length( $length ) {
+        return 15;
+    }
+    add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+    
+    function new_excerpt_more($more) {
+           global $post;
+    	return '<br><a class="readmore-link" href="'. get_permalink($post->ID) . '">Continue Reading</a>';
+    }
+    add_filter('excerpt_more', 'new_excerpt_more');
     
     /*
     |====================================================
