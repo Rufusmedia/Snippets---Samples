@@ -241,3 +241,23 @@
     }
     
     add_action('_admin_menu', 'remove_editor_menu', 1);
+
+/*
+|====================================================
+| RUN A CUSTOM LOOP
+|====================================================
+*/
+
+    // RETRIEVE LATEST POSTS FROM DATABASE.
+    query_posts(array(
+    	'posts_per_page'=> '5'
+    ));
+
+    <?php //RUN DEFAULT WORDPRESS LOOP ?>
+    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+
+        //loop code here
+
+    <?php endwhile; ?>
+    <?php endif; ?>
+    <?php wp_reset_query(); ?>
