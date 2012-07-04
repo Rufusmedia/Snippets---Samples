@@ -278,3 +278,16 @@
     <?php endwhile; ?>
     <?php endif; ?>
     <?php wp_reset_query(); ?>
+
+    /*
+    |====================================================
+    | DISABLE MULTIPLE IMAGE CREATION FROM ADMIN
+    |====================================================
+    */
+    function wplift_remove_image_sizes( $sizes) {
+            unset( $sizes['thumbnail']);
+            unset( $sizes['medium']);
+            unset( $sizes['large']);
+            return $sizes;
+    }
+    add_filter('intermediate_image_sizes_advanced', 'wplift_remove_image_sizes');
