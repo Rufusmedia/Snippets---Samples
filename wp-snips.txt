@@ -318,6 +318,23 @@
     <?php endwhile; ?>
     <?php endif; ?>
     <?php wp_reset_query(); ?>
+  
+     /*
+    |====================================================
+    | WORDPRESS PAGE LOOP
+    |====================================================
+    */  
+    
+                <?php 
+                // pulls and loops through all pages that are children of a page
+                query_posts(array('post_parent' => 8, 'post_type' => 'page', 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => -1));
+                while (have_posts()) : the_post(); ?>
+                    
+                    <!-- put html here -->
+                    
+                <?php endwhile;?>
+                <?php wp_reset_query();  // Restore global post data 
+                ?>
 
     /*
     |====================================================
